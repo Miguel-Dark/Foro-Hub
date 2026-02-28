@@ -26,9 +26,10 @@ public class Topico {
     private String nombreCurso;
     private String titulo;
 
-    public Topico(DatosRegistroTopico datos) {
+    public Topico(DatosRegistroTopico datos, Usuario usuario) {
         this.id = null;
         this.activo = true;
+        this.usuario = usuario;
         this.mensaje = datos.mensaje();
         this.nombreCurso = datos.nombreCurso();
         this.titulo = datos.titulo();

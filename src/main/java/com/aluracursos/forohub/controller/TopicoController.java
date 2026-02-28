@@ -4,6 +4,7 @@ import com.aluracursos.forohub.domain.topico.DatosListaTopico;
 import com.aluracursos.forohub.domain.topico.DatosRegistroTopico;
 import com.aluracursos.forohub.domain.topico.Topico;
 import com.aluracursos.forohub.domain.topico.TopicoRepository;
+import com.aluracursos.forohub.domain.usuario.UsuarioRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,14 +20,18 @@ public class TopicoController {
     @Autowired
     private TopicoRepository repository;
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
     @Transactional
     @PostMapping
     public void registrar(@RequestBody @Valid DatosRegistroTopico datos){
-        repository.save(new Topico(datos));
+        var usuario = usuarioRepository.getReferenceById(datos.usuario());
+        repository.save(new Topico(datos, usuario));
     }
 
     @GetMapping
-    public Page<DatosListaTopico> listar(@PageableDefault(size=10, sort={"usuario"}) Pageable paginacion) {
+    public Page<DatosListaTopico> listar(@PageableDefault(size=10, sort={"idUsuario"}) Pageable paginacion) {
         return repository.findAll(paginacion).map(DatosListaTopico::new);
     }
 }
