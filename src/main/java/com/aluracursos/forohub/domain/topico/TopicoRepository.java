@@ -1,4 +1,4 @@
-package com.aluracursos.forohub.topico;
+package com.aluracursos.forohub.domain.topico;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

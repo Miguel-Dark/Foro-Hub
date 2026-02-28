@@ -1,4 +1,4 @@
-package com.aluracursos.forohub.topico;
+package com.aluracursos.forohub.domain.topico;
 
 public record DatosListaTopico(
         Long id,
