@@ -10,7 +10,7 @@ public record DatosListaTopico(
     public DatosListaTopico(Topico topico) { //constructor
         this(
                 topico.getId(),
-                topico.getUsuario(),
+                topico.getUsuario().getNombre(),
                 topico.getMensaje(),
                 topico.getNombreCurso(),
                 topico.getTitulo()
