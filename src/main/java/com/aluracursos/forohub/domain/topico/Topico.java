@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,8 @@ public class Topico {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Boolean activo;
+
+    private LocalDateTime fechaCreacion;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "autor_id")
@@ -44,6 +47,7 @@ public class Topico {
         this.curso = curso;
         this.mensaje = datos.mensaje();
         this.titulo = datos.titulo();
+        this.fechaCreacion = LocalDateTime.now();
     }
 
 }

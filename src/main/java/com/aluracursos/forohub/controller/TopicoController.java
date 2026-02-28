@@ -1,18 +1,17 @@
 package com.aluracursos.forohub.controller;
 
 import com.aluracursos.forohub.domain.curso.CursoRepository;
-import com.aluracursos.forohub.domain.topico.DatosListaTopico;
-import com.aluracursos.forohub.domain.topico.DatosRegistroTopico;
-import com.aluracursos.forohub.domain.topico.Topico;
-import com.aluracursos.forohub.domain.topico.TopicoRepository;
+import com.aluracursos.forohub.domain.topico.*;
 import com.aluracursos.forohub.domain.usuario.UsuarioRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/topicos")
@@ -29,11 +28,14 @@ public class TopicoController {
 
     @Transactional
     @PostMapping
-    public void registrar(@RequestBody @Valid DatosRegistroTopico datos){
+    public ResponseEntity registrar(@RequestBody @Valid DatosRegistroTopico datos, UriComponentsBuilder uriComponentsBuilder){
         var usuario = usuarioRepository.getReferenceById(datos.idUsuario());
         var curso = cursoRepository.getReferenceById(datos.idCurso());
+        var topico = repository.save(new Topico(datos, usuario, curso));
 
-        repository.save(new Topico(datos, usuario, curso));
+        var uri = uriComponentsBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(new DatosDetalleTopico(topico));
     }
 
     @GetMapping
