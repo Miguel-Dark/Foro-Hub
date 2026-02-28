@@ -1,5 +1,6 @@
 package com.aluracursos.forohub.domain.topico;
 
+import com.aluracursos.forohub.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -17,7 +18,10 @@ public class Topico {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Boolean activo;
-    private String usuario;
+
+    @ManyToOne
+    private Usuario usuario;
+
     private String mensaje;
     private String nombreCurso;
     private String titulo;
@@ -25,7 +29,6 @@ public class Topico {
     public Topico(DatosRegistroTopico datos) {
         this.id = null;
         this.activo = true;
-        this.usuario = datos.usuario();
         this.mensaje = datos.mensaje();
         this.nombreCurso = datos.nombreCurso();
         this.titulo = datos.titulo();
