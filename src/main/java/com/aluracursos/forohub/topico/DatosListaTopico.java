@@ -1,0 +1,19 @@
+package com.aluracursos.forohub.topico;
+
+public record DatosListaTopico(
+        Long id,
+        String usuario,
+        String mensaje,
+        String nombreCurso,
+        String titulo
+) {
+    public DatosListaTopico(Topico topico) { //constructor
+        this(
+                topico.getId(),
+                topico.getUsuario(),
+                topico.getMensaje(),
+                topico.getNombreCurso(),
+                topico.getTitulo()
+        );
+    }
+}
