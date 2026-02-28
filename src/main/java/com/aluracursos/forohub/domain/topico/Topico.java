@@ -1,11 +1,16 @@
 package com.aluracursos.forohub.domain.topico;
 
+import com.aluracursos.forohub.domain.curso.Curso;
+import com.aluracursos.forohub.domain.respuesta.Respuesta;
 import com.aluracursos.forohub.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(name = "topicos")
 @Entity(name = "Topico")
@@ -19,19 +24,25 @@ public class Topico {
     private Long id;
     private Boolean activo;
 
-    @ManyToOne
-    private Usuario usuario;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "autor_id")
+    private Usuario autor;
 
     private String mensaje;
-    private String nombreCurso;
     private String titulo;
 
-    public Topico(DatosRegistroTopico datos, Usuario usuario) {
-        this.id = null;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "curso_id")
+    private Curso curso;
+
+    @OneToMany(mappedBy = "topico", cascade = CascadeType.ALL)
+    private List<Respuesta> respuestas = new ArrayList<>();
+
+    public Topico(DatosRegistroTopico datos, Usuario usuario, Curso curso) {
         this.activo = true;
-        this.usuario = usuario;
+        this.autor = usuario;
+        this.curso = curso;
         this.mensaje = datos.mensaje();
-        this.nombreCurso = datos.nombreCurso();
         this.titulo = datos.titulo();
     }
 

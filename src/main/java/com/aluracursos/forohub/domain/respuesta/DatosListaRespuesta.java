@@ -6,7 +6,7 @@ public record DatosListaRespuesta(
         Long id,
         String nombre,
         LocalDateTime fechaCreacion,
-        String usuario,
+        String autor,
         String tituloTopico
 ) {
 

@@ -26,7 +26,7 @@ public class Respuesta {
     private Topico topico;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "autor_id")
     private Usuario autor;
 
     private String solucion;

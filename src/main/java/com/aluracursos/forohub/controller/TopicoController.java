@@ -1,5 +1,6 @@
 package com.aluracursos.forohub.controller;
 
+import com.aluracursos.forohub.domain.curso.CursoRepository;
 import com.aluracursos.forohub.domain.topico.DatosListaTopico;
 import com.aluracursos.forohub.domain.topico.DatosRegistroTopico;
 import com.aluracursos.forohub.domain.topico.Topico;
@@ -23,11 +24,16 @@ public class TopicoController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private CursoRepository cursoRepository;
+
     @Transactional
     @PostMapping
     public void registrar(@RequestBody @Valid DatosRegistroTopico datos){
-        var usuario = usuarioRepository.getReferenceById(datos.usuario());
-        repository.save(new Topico(datos, usuario));
+        var usuario = usuarioRepository.getReferenceById(datos.idUsuario());
+        var curso = cursoRepository.getReferenceById(datos.idCurso());
+
+        repository.save(new Topico(datos, usuario, curso));
     }
 
     @GetMapping
