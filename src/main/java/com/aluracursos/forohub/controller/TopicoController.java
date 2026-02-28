@@ -1,6 +1,8 @@
 package com.aluracursos.forohub.controller;
 
 import com.aluracursos.forohub.topico.DatosRegistroTopico;
+import com.aluracursos.forohub.topico.Topico;
+import com.aluracursos.forohub.topico.TopicoRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
