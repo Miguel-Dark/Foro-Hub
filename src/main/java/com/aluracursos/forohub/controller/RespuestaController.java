@@ -1,5 +1,6 @@
 package com.aluracursos.forohub.controller;
 
+import com.aluracursos.forohub.domain.respuesta.DatosListaRespuesta;
 import com.aluracursos.forohub.domain.respuesta.DatosRegistroRespuesta;
 import com.aluracursos.forohub.domain.respuesta.Respuesta;
 import com.aluracursos.forohub.domain.respuesta.RespuestaRepository;
