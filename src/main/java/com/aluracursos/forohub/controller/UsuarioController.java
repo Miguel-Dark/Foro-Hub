@@ -1,5 +1,7 @@
 package com.aluracursos.forohub.controller;
 
+import com.aluracursos.forohub.domain.perfil.Perfil;
+import com.aluracursos.forohub.domain.perfil.PerfilRepository;
 import com.aluracursos.forohub.domain.usuario.DatosListaUsuario;
 import com.aluracursos.forohub.domain.usuario.DatosRegistroUsuario;
 import com.aluracursos.forohub.domain.usuario.Usuario;
@@ -12,6 +14,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
@@ -19,10 +23,14 @@ public class UsuarioController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private PerfilRepository perfilRepository;
+
     @Transactional
     @PostMapping
     public void registrar(@RequestBody @Valid DatosRegistroUsuario datos){
-        usuarioRepository.save(new Usuario(datos));
+        Perfil perfilUsuario = perfilRepository.findByNombre("USUARIO");
+        usuarioRepository.save(new Usuario(datos, List.of(perfilUsuario)));
     }
 
     @GetMapping

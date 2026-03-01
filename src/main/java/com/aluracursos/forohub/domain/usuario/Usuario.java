@@ -1,5 +1,6 @@
 package com.aluracursos.forohub.domain.usuario;
 
+import com.aluracursos.forohub.domain.perfil.Perfil;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -38,6 +39,6 @@ public class Usuario {
         this.nombre = datos.nombre();
         this.email = datos.email();
         this.contrasena = datos.contrasena();
-        this.perfiles = perfiles();
+        this.perfiles = perfiles;
     }
 }
