@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +35,8 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public Page<DatosListaUsuario> listar(@PageableDefault(size=10, sort={"nombre"}) Pageable paginacion) {
-        return usuarioRepository.findAll(paginacion).map(DatosListaUsuario::new);
+    public ResponseEntity<Page<DatosListaUsuario>> listar(@PageableDefault(size=10, sort={"nombre"}) Pageable paginacion) {
+        var page = usuarioRepository.findAll(paginacion).map(DatosListaUsuario::new);
+        return ResponseEntity.ok(page);
     }
 }

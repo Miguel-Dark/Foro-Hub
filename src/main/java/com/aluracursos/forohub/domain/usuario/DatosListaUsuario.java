@@ -2,18 +2,20 @@ package com.aluracursos.forohub.domain.usuario;
 
 import com.aluracursos.forohub.domain.perfil.Perfil;
 
+import java.util.List;
+
 public record DatosListaUsuario(
         Long id,
         String nombre,
         String email,
-        Perfil perfil
+        List<Perfil> perfiles
 ) {
     public DatosListaUsuario(Usuario usuario) { //constructor
         this(
                 usuario.getId(),
                 usuario.getNombre(),
                 usuario.getEmail(),
-                usuario.getPerfil()
+                usuario.getPerfiles()
         );
     }
 }
