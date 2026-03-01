@@ -1,5 +1,7 @@
 package com.aluracursos.forohub.controller;
 
+import com.aluracursos.forohub.domain.perfil.DatosDetallePerfil;
+import com.aluracursos.forohub.domain.perfil.DatosRegistroPerfil;
 import com.aluracursos.forohub.domain.perfil.Perfil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
