@@ -1,5 +1,7 @@
 package com.aluracursos.forohub.domain.usuario;
 
+import com.aluracursos.forohub.domain.perfil.Perfil;
+
 public record DatosListaUsuario(
         Long id,
         String nombre,

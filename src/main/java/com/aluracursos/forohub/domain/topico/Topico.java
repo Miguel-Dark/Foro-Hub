@@ -23,16 +23,14 @@ public class Topico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Boolean activo;
-
+    private String titulo;
+    private String mensaje;
     private LocalDateTime fechaCreacion;
+    private Boolean status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "autor_id")
     private Usuario autor;
-
-    private String mensaje;
-    private String titulo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "curso_id")
@@ -42,12 +40,12 @@ public class Topico {
     private List<Respuesta> respuestas = new ArrayList<>();
 
     public Topico(DatosRegistroTopico datos, Usuario usuario, Curso curso) {
-        this.activo = true;
+        this.id = null;
+        this.titulo = datos.titulo();
+        this.mensaje = datos.mensaje();
+        this.fechaCreacion = LocalDateTime.now();
+        this.status = true;
         this.autor = usuario;
         this.curso = curso;
-        this.mensaje = datos.mensaje();
-        this.titulo = datos.titulo();
-        this.fechaCreacion = LocalDateTime.now();
     }
-
 }

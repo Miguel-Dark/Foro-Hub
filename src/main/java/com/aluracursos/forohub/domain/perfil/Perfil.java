@@ -27,12 +27,10 @@ public class Perfil {
 
 
     public Perfil(String nombre) {
-        this();
         this.nombre = nombre;
     }
 
     public Perfil(DatosRegistroPerfil datos) {
-        this();
         this.nombre = datos.nombre();
     }
 }
