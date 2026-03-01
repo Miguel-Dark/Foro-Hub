@@ -1,9 +1,6 @@
 package com.aluracursos.forohub.controller;
 
-import com.aluracursos.forohub.domain.respuesta.DatosListaRespuesta;
-import com.aluracursos.forohub.domain.respuesta.DatosRegistroRespuesta;
-import com.aluracursos.forohub.domain.respuesta.Respuesta;
-import com.aluracursos.forohub.domain.respuesta.RespuestaRepository;
+import com.aluracursos.forohub.domain.respuesta.*;
 import com.aluracursos.forohub.domain.topico.TopicoRepository;
 import com.aluracursos.forohub.domain.usuario.UsuarioRepository;
 import jakarta.validation.Valid;
