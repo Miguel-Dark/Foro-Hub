@@ -46,4 +46,18 @@ public class TopicoController {
         var page = repository.findAll(paginacion).map(DatosListaTopico::new);
         return ResponseEntity.ok(page);
     }
+
+    @Transactional
+    @PutMapping("/{id}")
+    public ResponseEntity actualizar(@PathVariable Long id, @RequestBody @Valid DatosActualizacionTopico datos) {
+        var optionalTopico = repository.findById(id);
+
+        if (optionalTopico.isPresent()) {
+            var topico = optionalTopico.get();
+            topico.actualizarInformacion(datos);
+            return ResponseEntity.ok(new DatosDetalleTopico(topico));
+        }
+
+        return ResponseEntity.notFound().build();
+    }
 }

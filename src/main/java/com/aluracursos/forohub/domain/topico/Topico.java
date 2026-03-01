@@ -4,6 +4,7 @@ import com.aluracursos.forohub.domain.curso.Curso;
 import com.aluracursos.forohub.domain.respuesta.Respuesta;
 import com.aluracursos.forohub.domain.usuario.Usuario;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -47,5 +48,15 @@ public class Topico {
         this.status = true;
         this.autor = usuario;
         this.curso = curso;
+    }
+
+    public void actualizarInformacion(@Valid DatosActualizacionTopico datos) {
+        if (datos.mensaje() != null) {
+            this.mensaje = datos.mensaje();
+        }
+
+        if (datos.titulo() != null) {
+            this.titulo = datos.titulo();
+        }
     }
 }
