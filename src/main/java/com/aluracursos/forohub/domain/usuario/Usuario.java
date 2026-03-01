@@ -6,6 +6,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Table(name = "usuarios")
 @Entity(name = "Usuario")
 @Getter
@@ -21,15 +24,20 @@ public class Usuario {
     private String email;
     private String contrasena;
 
-    @Enumerated(EnumType.STRING)
-    private Perfil perfil;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "usuarios_perfiles",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "perfil_id")
+    )
+    private List<Perfil> perfiles = new ArrayList<>();
 
-    public Usuario(DatosRegistroUsuario datos) {
+    public Usuario(DatosRegistroUsuario datos, List<Perfil> perfiles) {
         this.id = null;
         this.activo = true;
         this.nombre = datos.nombre();
         this.email = datos.email();
         this.contrasena = datos.contrasena();
-        this.perfil = datos.perfil();
+        this.perfiles = perfiles();
     }
 }
