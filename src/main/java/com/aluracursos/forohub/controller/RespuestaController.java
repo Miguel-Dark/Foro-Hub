@@ -14,6 +14,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/respuestas")
@@ -29,12 +30,15 @@ public class RespuestaController {
 
     @Transactional
     @PostMapping
-    public ResponseEntity registrar(@RequestBody @Valid DatosRegistroRespuesta datos){
+    public ResponseEntity registrar(@RequestBody @Valid DatosRegistroRespuesta datos,
+                                    UriComponentsBuilder uriComponentsBuilder){
         var autor = usuarioRepository.getReferenceById(datos.idUsuario());
         var topico = topicoRepository.getReferenceById(datos.idTopico());
         var respuesta = new Respuesta(datos.mensaje(), autor, topico);
+        respuesta = repository.save(respuesta);
+        var uri = uriComponentsBuilder.path("/respuestas/{id}").buildAndExpand(respuesta.getId()).toUri();
 
-        repository.save(respuesta);
+        return ResponseEntity.created(uri).body(new DatosDetalleRespuesta(respuesta));
     }
 
     @GetMapping

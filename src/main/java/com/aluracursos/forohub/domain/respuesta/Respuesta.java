@@ -19,16 +19,27 @@ public class Respuesta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String mensaje;
-    private LocalDateTime fechaCreacion = LocalDateTime.now();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "topico_id")
     private Topico topico;
 
+    private LocalDateTime fechaCreacion = LocalDateTime.now();
+
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "autor_id")
     private Usuario autor;
 
-    private String solucion;
+    private Boolean solucion;
 
+    public Respuesta(String mensaje, Usuario autor, Topico topico) {
+        this.id = null;
+        this.mensaje = mensaje;
+        this.autor = autor;
+        this.topico = topico;
+        this.fechaCreacion = LocalDateTime.now();
+        this.solucion = false;
+    }
 }
