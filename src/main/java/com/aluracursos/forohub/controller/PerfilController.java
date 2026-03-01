@@ -3,6 +3,7 @@ package com.aluracursos.forohub.controller;
 import com.aluracursos.forohub.domain.perfil.DatosDetallePerfil;
 import com.aluracursos.forohub.domain.perfil.DatosRegistroPerfil;
 import com.aluracursos.forohub.domain.perfil.Perfil;
+import com.aluracursos.forohub.domain.perfil.PerfilRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class PerfilController {
     @Transactional
     public ResponseEntity<DatosDetallePerfil> registrar(@RequestBody @Valid DatosRegistroPerfil datos,
                                                         UriComponentsBuilder uriComponentsBuilder) {
-        Perfil perfil = repository.save(new Perfil(datos));
+        Perfil perfil = repository.save(new Perfil(datos.nombre()));
         DatosDetallePerfil datosDetallePerfil = new DatosDetallePerfil(perfil);
         var url = uriComponentsBuilder.path("/perfiles/{id}").buildAndExpand(perfil.getId()).toUri();
         return ResponseEntity.created(url).body(datosDetallePerfil);

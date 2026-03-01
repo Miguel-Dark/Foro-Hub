@@ -25,7 +25,14 @@ public class Perfil {
     @ManyToMany(mappedBy = "perfiles")
     private List<Usuario> usuarios = new ArrayList<>();
 
+
     public Perfil(String nombre) {
+        this();
         this.nombre = nombre;
+    }
+
+    public Perfil(DatosRegistroPerfil datos) {
+        this();
+        this.nombre = datos.nombre();
     }
 }
