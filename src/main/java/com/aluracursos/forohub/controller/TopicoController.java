@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +29,8 @@ public class TopicoController {
 
     @Transactional
     @PostMapping
-    public ResponseEntity registrar(@RequestBody @Valid DatosRegistroTopico datos, UriComponentsBuilder uriComponentsBuilder){
+    public ResponseEntity registrar(@RequestBody @Valid DatosRegistroTopico datos,
+                                    UriComponentsBuilder uriComponentsBuilder){
         var usuario = usuarioRepository.getReferenceById(datos.idUsuario());
         var curso = cursoRepository.getReferenceById(datos.idCurso());
         var topico = repository.save(new Topico(datos, usuario, curso));
@@ -39,7 +41,9 @@ public class TopicoController {
     }
 
     @GetMapping
-    public Page<DatosListaTopico> listar(@PageableDefault(size=10, sort={"idUsuario"}) Pageable paginacion) {
-        return repository.findAll(paginacion).map(DatosListaTopico::new);
+    public ResponseEntity<Page<DatosListaTopico>> listar(@PageableDefault(
+            size=10, sort={"fechaCreacion"}, direction = Sort.Direction.ASC) Pageable paginacion) {
+        var page = repository.findAll(paginacion).map(DatosListaTopico::new);
+        return ResponseEntity.ok(page);
     }
 }
