@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotNull;
 public record DatosActualizacionTopico(
         @NotNull Long id,
         String mensaje,
-        String titulo
+        String titulo,
+        Long idUsuario,
+        Long idCurso
 ) {
 }

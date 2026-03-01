@@ -1,7 +1,9 @@
 package com.aluracursos.forohub.controller;
 
+import com.aluracursos.forohub.domain.curso.Curso;
 import com.aluracursos.forohub.domain.curso.CursoRepository;
 import com.aluracursos.forohub.domain.topico.*;
+import com.aluracursos.forohub.domain.usuario.Usuario;
 import com.aluracursos.forohub.domain.usuario.UsuarioRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,10 +53,20 @@ public class TopicoController {
     @PutMapping("/{id}")
     public ResponseEntity actualizar(@PathVariable Long id, @RequestBody @Valid DatosActualizacionTopico datos) {
         var optionalTopico = repository.findById(id);
-
         if (optionalTopico.isPresent()) {
             var topico = optionalTopico.get();
-            topico.actualizarInformacion(datos);
+
+            Usuario nuevoAutor = null;
+            if (datos.idUsuario() != null) {
+                nuevoAutor = usuarioRepository.getReferenceById(datos.idUsuario());
+            }
+
+            Curso nuevoCurso = null;
+            if (datos.idCurso() != null) {
+                nuevoCurso = cursoRepository.getReferenceById(datos.idCurso());
+            }
+
+            topico.actualizarInformacion(datos, nuevoAutor, nuevoCurso);
             return ResponseEntity.ok(new DatosDetalleTopico(topico));
         }
 

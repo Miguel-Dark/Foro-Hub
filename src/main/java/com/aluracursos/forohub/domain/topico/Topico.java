@@ -50,13 +50,18 @@ public class Topico {
         this.curso = curso;
     }
 
-    public void actualizarInformacion(@Valid DatosActualizacionTopico datos) {
+    public void actualizarInformacion(@Valid DatosActualizacionTopico datos, Usuario nuevoAutor, Curso nuevoCurso) {
         if (datos.mensaje() != null) {
             this.mensaje = datos.mensaje();
         }
-
         if (datos.titulo() != null) {
             this.titulo = datos.titulo();
+        }
+        if (nuevoAutor != null) {
+            this.autor = nuevoAutor;
+        }
+        if (nuevoCurso != null) {
+            this.curso = nuevoCurso;
         }
     }
 }
