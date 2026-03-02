@@ -1,6 +1,9 @@
 package com.aluracursos.forohub.controller;
 
+import com.aluracursos.forohub.domain.curso.Curso;
+import com.aluracursos.forohub.domain.perfil.Perfil;
 import com.aluracursos.forohub.domain.perfil.PerfilRepository;
+import com.aluracursos.forohub.domain.topico.DatosActualizacionTopico;
 import com.aluracursos.forohub.domain.topico.DatosDetalleTopico;
 import com.aluracursos.forohub.domain.usuario.*;
 import jakarta.validation.Valid;
@@ -51,6 +54,24 @@ public class UsuarioController {
 
         if (optionalUsuario.isPresent()) {
             var usuario = optionalUsuario.get();
+            return ResponseEntity.ok(new DatosDetalleUsuario(usuario));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @Transactional
+    @PutMapping("/{id}")
+    public ResponseEntity actualizar(@PathVariable Long id, @RequestBody @Valid DatosActualizarUsuario datos) {
+        var optionalUsuario = repository.findById(id);
+        if (optionalUsuario.isPresent()) {
+            var usuario = optionalUsuario.get();
+
+            List<Perfil> nuevosPerfiles = null;
+            if (datos.idPerfiles() != null) {
+                nuevosPerfiles = perfilRepository.findAllById(datos.idPerfiles());
+            }
+
+            usuario.actualizarInformacion(datos, nuevosPerfiles);
             return ResponseEntity.ok(new DatosDetalleUsuario(usuario));
         }
         return ResponseEntity.notFound().build();

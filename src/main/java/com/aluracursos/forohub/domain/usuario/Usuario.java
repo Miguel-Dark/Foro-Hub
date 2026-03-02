@@ -2,6 +2,7 @@ package com.aluracursos.forohub.domain.usuario;
 
 import com.aluracursos.forohub.domain.perfil.Perfil;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -38,5 +39,17 @@ public class Usuario {
         this.email = datos.email();
         this.contrasena = datos.contrasena();
         this.perfiles = perfiles;
+    }
+
+    public void actualizarInformacion(@Valid DatosActualizarUsuario datos, List<Perfil> nuevosPerfiles) {
+        if (datos.nombre() != null) {
+            this.nombre = datos.nombre();
+        }
+        if (datos.email() != null) {
+            this.email = datos.email();
+        }
+        if (nuevosPerfiles != null) {
+            this.perfiles = nuevosPerfiles;
+        }
     }
 }
