@@ -72,4 +72,16 @@ public class TopicoController {
 
         return ResponseEntity.notFound().build();
     }
+
+    @Transactional
+    @GetMapping("/{id}")
+    public ResponseEntity detallar(@PathVariable Long id) {
+        var optionalTopico = repository.findById(id);
+
+        if (optionalTopico.isPresent()) {
+            var topico = optionalTopico.get();
+            return ResponseEntity.ok(new DatosDetalleTopico(topico));
+        }
+        return ResponseEntity.notFound().build();
+    }
 }
