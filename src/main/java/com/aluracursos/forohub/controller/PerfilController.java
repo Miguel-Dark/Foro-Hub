@@ -1,6 +1,7 @@
 package com.aluracursos.forohub.controller;
 
 import com.aluracursos.forohub.domain.perfil.*;
+import com.aluracursos.forohub.domain.topico.DatosDetalleTopico;
 import com.aluracursos.forohub.domain.usuario.DatosListaUsuario;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,17 @@ public class PerfilController {
             sort={"nombre"}, direction = Sort.Direction.ASC) Pageable paginacion) {
         var page = repository.findAll(paginacion).map(DatosListaPerfil::new);
         return ResponseEntity.ok(page);
+    }
+
+    @Transactional
+    @GetMapping("/{id}")
+    public ResponseEntity detallar(@PathVariable Long id) {
+        var optionalPerfil = repository.findById(id);
+
+        if (optionalPerfil.isPresent()) {
+            var perfil = optionalPerfil.get();
+            return ResponseEntity.ok(new DatosDetallePerfil(perfil));
+        }
+        return ResponseEntity.notFound().build();
     }
 }
