@@ -1,6 +1,7 @@
 package com.aluracursos.forohub.controller;
 
 import com.aluracursos.forohub.domain.respuesta.*;
+import com.aluracursos.forohub.domain.topico.DatosDetalleTopico;
 import com.aluracursos.forohub.domain.topico.TopicoRepository;
 import com.aluracursos.forohub.domain.usuario.UsuarioRepository;
 import jakarta.validation.Valid;
@@ -44,5 +45,17 @@ public class RespuestaController {
             size=10, sort={"fechaCreacion"}, direction = Sort.Direction.ASC) Pageable paginacion) {
             var page = repository.findAll(paginacion).map(DatosListaRespuesta::new);
         return ResponseEntity.ok(page);
+    }
+
+    @Transactional
+    @GetMapping("/{id}")
+    public ResponseEntity detallar(@PathVariable Long id) {
+        var optionalRespuesta = repository.findById(id);
+
+        if (optionalRespuesta.isPresent()) {
+            var respuesta = optionalRespuesta.get();
+            return ResponseEntity.ok(new DatosDetalleRespuesta(respuesta));
+        }
+        return ResponseEntity.notFound().build();
     }
 }
