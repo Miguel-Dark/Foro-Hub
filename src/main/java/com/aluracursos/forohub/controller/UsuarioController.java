@@ -1,6 +1,7 @@
 package com.aluracursos.forohub.controller;
 
 import com.aluracursos.forohub.domain.perfil.PerfilRepository;
+import com.aluracursos.forohub.domain.topico.DatosDetalleTopico;
 import com.aluracursos.forohub.domain.usuario.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,21 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DatosListaUsuario>> listar(@PageableDefault(size=10, sort={"nombre"}) Pageable paginacion) {
+    public ResponseEntity<Page<DatosListaUsuario>> listar(@PageableDefault(size=10,
+            sort={"nombre"}) Pageable paginacion) {
         var page = repository.findAll(paginacion).map(DatosListaUsuario::new);
         return ResponseEntity.ok(page);
+    }
+
+    @Transactional
+    @GetMapping("/{id}")
+    public ResponseEntity detallar(@PathVariable Long id) {
+        var optionalUsuario = repository.findById(id);
+
+        if (optionalUsuario.isPresent()) {
+            var usuario = optionalUsuario.get();
+            return ResponseEntity.ok(new DatosDetalleUsuario(usuario));
+        }
+        return ResponseEntity.notFound().build();
     }
 }
