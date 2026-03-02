@@ -1,8 +1,11 @@
 package com.aluracursos.forohub.domain.respuesta;
 
+import com.aluracursos.forohub.domain.curso.Curso;
+import com.aluracursos.forohub.domain.topico.DatosActualizacionTopico;
 import com.aluracursos.forohub.domain.topico.Topico;
 import com.aluracursos.forohub.domain.usuario.Usuario;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -41,5 +44,20 @@ public class Respuesta {
         this.topico = topico;
         this.fechaCreacion = LocalDateTime.now();
         this.solucion = false;
+    }
+
+    public void actualizarInformacion(@Valid DatosActualizacionRespuesta datos, Usuario nuevoAutor, Topico nuevoTopico) {
+        if (datos.mensaje() != null) {
+            this.mensaje = datos.mensaje();
+        }
+        if (nuevoAutor != null) {
+            this.autor = nuevoAutor;
+        }
+        if (nuevoTopico != null) {
+            this.topico = nuevoTopico;
+        }
+        if (datos.solucion() != null) {
+            this.solucion = datos.solucion();
+        }
     }
 }

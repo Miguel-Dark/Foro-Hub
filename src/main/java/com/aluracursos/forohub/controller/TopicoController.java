@@ -81,7 +81,6 @@ public class TopicoController {
             topico.actualizarInformacion(datos, nuevoAutor, nuevoCurso);
             return ResponseEntity.ok(new DatosDetalleTopico(topico));
         }
-
         return ResponseEntity.notFound().build();
     }
 
