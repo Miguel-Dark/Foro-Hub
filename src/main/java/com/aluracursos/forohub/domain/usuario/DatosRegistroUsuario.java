@@ -9,5 +9,6 @@ public record DatosRegistroUsuario(
         @NotBlank String nombre,
         @NotBlank @Email String email,
         @NotBlank String contrasena,
-        @NotNull Perfil perfil) {
+        @NotNull Long idPerfil
+) {
 }
