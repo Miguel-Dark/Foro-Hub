@@ -83,4 +83,16 @@ public class RespuestaController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @Transactional
+    @DeleteMapping("/{id}")
+    public ResponseEntity eliminar(@PathVariable Long id) {
+        var optionalRespuesta = repository.findById(id);
+
+        if (optionalRespuesta.isPresent()) {
+            repository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
 }
