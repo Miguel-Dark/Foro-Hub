@@ -64,4 +64,8 @@ public class Topico {
             this.curso = nuevoCurso;
         }
     }
+
+    public void desactivar() {
+        this.status = false;
+    }
 }
