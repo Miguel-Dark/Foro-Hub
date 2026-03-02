@@ -20,7 +20,6 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Boolean activo;
     private String nombre;
     private String email;
     private String contrasena;
@@ -35,7 +34,6 @@ public class Usuario {
 
     public Usuario(DatosRegistroUsuario datos, List<Perfil> perfiles) {
         this.id = null;
-        this.activo = true;
         this.nombre = datos.nombre();
         this.email = datos.email();
         this.contrasena = datos.contrasena();

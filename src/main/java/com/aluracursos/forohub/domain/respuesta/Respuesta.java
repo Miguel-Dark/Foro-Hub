@@ -1,7 +1,5 @@
 package com.aluracursos.forohub.domain.respuesta;
 
-import com.aluracursos.forohub.domain.curso.Curso;
-import com.aluracursos.forohub.domain.topico.DatosActualizacionTopico;
 import com.aluracursos.forohub.domain.topico.Topico;
 import com.aluracursos.forohub.domain.usuario.Usuario;
 import jakarta.persistence.*;
@@ -28,8 +26,6 @@ public class Respuesta {
     private Topico topico;
 
     private LocalDateTime fechaCreacion = LocalDateTime.now();
-
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "autor_id")
