@@ -4,10 +4,11 @@ import java.time.LocalDateTime;
 
 public record DatosListaRespuesta(
         Long id,
-        String nombre,
+        String mensaje,
         LocalDateTime fechaCreacion,
         String autor,
-        String tituloTopico
+        String tituloTopico,
+        Boolean solucion
 ) {
 
     public DatosListaRespuesta(Respuesta respuesta) {
@@ -16,7 +17,8 @@ public record DatosListaRespuesta(
                 respuesta.getMensaje(),
                 respuesta.getFechaCreacion(),
                 respuesta.getAutor().getNombre(),
-                respuesta.getTopico().getTitulo()
+                respuesta.getTopico().getTitulo(),
+                respuesta.getSolucion()
         );
     }
 }
