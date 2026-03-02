@@ -76,4 +76,16 @@ public class UsuarioController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @Transactional
+    @DeleteMapping("/{id}")
+    public ResponseEntity eliminar(@PathVariable Long id) {
+        var usuario = repository.findById(id);
+
+        if (usuario.isPresent()) {
+            repository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
 }
