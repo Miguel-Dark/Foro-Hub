@@ -21,13 +21,12 @@ public class PerfilController {
     @Autowired
     private PerfilRepository repository;
 
-    @PostMapping
     @Transactional
-    public ResponseEntity<DatosDetallePerfil> registrar(@RequestBody @Valid DatosRegistroPerfil datos,
-                                                        UriComponentsBuilder uriComponentsBuilder) {
-        Perfil perfil = repository.save(new Perfil(datos.nombre()));
-        DatosDetallePerfil datosDetallePerfil = new DatosDetallePerfil(perfil);
+    @PostMapping
+    public ResponseEntity registrar(@RequestBody @Valid DatosRegistroPerfil datos,
+                                    UriComponentsBuilder uriComponentsBuilder) {
+        var perfil = repository.save(new Perfil(datos.nombre()));
         var url = uriComponentsBuilder.path("/perfiles/{id}").buildAndExpand(perfil.getId()).toUri();
-        return ResponseEntity.created(url).body(datosDetallePerfil);
+        return ResponseEntity.created(url).body(new DatosDetallePerfil(perfil));
     }
 }
