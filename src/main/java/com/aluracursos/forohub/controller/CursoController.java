@@ -1,9 +1,6 @@
 package com.aluracursos.forohub.controller;
 
-import com.aluracursos.forohub.domain.curso.Curso;
-import com.aluracursos.forohub.domain.curso.CursoRepository;
-import com.aluracursos.forohub.domain.curso.DatosListaCurso;
-import com.aluracursos.forohub.domain.curso.DatosRegistroCurso;
+import com.aluracursos.forohub.domain.curso.*;
 import com.aluracursos.forohub.domain.topico.DatosDetalleTopico;
 import com.aluracursos.forohub.domain.topico.Topico;
 import com.aluracursos.forohub.domain.topico.TopicoRepository;
