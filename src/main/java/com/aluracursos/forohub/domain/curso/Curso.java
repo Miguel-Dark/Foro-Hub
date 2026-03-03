@@ -24,9 +24,9 @@ public class Curso {
     private boolean activo;
 
     public Curso(DatosRegistroCurso datos) {
-        this.id = null;
         this.nombre = datos.nombre();
         this.categoria = datos.categoria();
+        this.activo = true;
     }
 
     public void actualizarInformacion(@Valid DatosActualizacionCurso datos) {
