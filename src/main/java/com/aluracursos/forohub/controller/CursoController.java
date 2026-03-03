@@ -1,6 +1,8 @@
 package com.aluracursos.forohub.controller;
 
 import com.aluracursos.forohub.domain.curso.*;
+import com.aluracursos.forohub.domain.perfil.DatosActualizarPerfil;
+import com.aluracursos.forohub.domain.perfil.DatosDetallePerfil;
 import com.aluracursos.forohub.domain.topico.DatosDetalleTopico;
 import com.aluracursos.forohub.domain.topico.DatosListaTopico;
 import com.aluracursos.forohub.domain.topico.Topico;
@@ -54,5 +56,18 @@ public class CursoController {
         return cursoRepository.findById(id)
                 .map(curso -> ResponseEntity.ok(new DatosDetalleCurso(curso)))
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @Transactional
+    @PutMapping("/{id}")
+    public ResponseEntity actualizar(@PathVariable Long id, @RequestBody @Valid DatosActualizacionCurso datos) {
+        var optionalCurso = repository.findById(id);
+        if (optionalCurso.isPresent()) {
+            var curso = optionalCurso.get();
+            curso.actualizarInformacion(datos);
+
+            return ResponseEntity.ok(new DatosDetalleCurso(curso));
+        }
+        return ResponseEntity.notFound().build();
     }
 }
