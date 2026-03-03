@@ -1,11 +1,6 @@
 package com.aluracursos.forohub.controller;
 
-import com.aluracursos.forohub.domain.curso.Curso;
 import com.aluracursos.forohub.domain.perfil.*;
-import com.aluracursos.forohub.domain.topico.DatosActualizacionTopico;
-import com.aluracursos.forohub.domain.topico.DatosDetalleTopico;
-import com.aluracursos.forohub.domain.usuario.DatosListaUsuario;
-import com.aluracursos.forohub.domain.usuario.Usuario;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,7 +31,7 @@ public class PerfilController {
     @GetMapping
     public ResponseEntity<Page<DatosListaPerfil>> listar(@PageableDefault(size=10,
             sort={"nombre"}, direction = Sort.Direction.ASC) Pageable paginacion) {
-        var page = repository.findAll(paginacion).map(DatosListaPerfil::new);
+        var page = repository.findAllByActivoTrue(paginacion).map(DatosListaPerfil::new);
         return ResponseEntity.ok(page);
     }
 
@@ -61,6 +56,18 @@ public class PerfilController {
             perfil.actualizarInformacion(datos);
 
             return ResponseEntity.ok(new DatosDetallePerfil(perfil));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @Transactional
+    @DeleteMapping("/{id}")
+    public ResponseEntity eliminar(@PathVariable Long id) {
+        var optionalPerfil = repository.findById(id);
+        if (optionalPerfil.isPresent()) {
+            var perfil = optionalPerfil.get();
+            perfil.eliminarLogico();
+            return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
     }

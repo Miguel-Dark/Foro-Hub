@@ -22,23 +22,22 @@ public class Perfil {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
+    private boolean activo = true;
 
     @ManyToMany(mappedBy = "perfiles")
     private List<Usuario> usuarios = new ArrayList<>();
 
-
     public Perfil(String nombre) {
         this.nombre = nombre;
-    }
-
-    public Perfil(DatosRegistroPerfil datos) {
-
-        this.nombre = datos.nombre();
     }
 
     public void actualizarInformacion(@Valid DatosActualizarPerfil datos) {
         if (datos.nombre() != null) {
             this.nombre = datos.nombre();
         }
+    }
+
+    public void eliminarLogico() {
+        this.activo = false;
     }
 }
