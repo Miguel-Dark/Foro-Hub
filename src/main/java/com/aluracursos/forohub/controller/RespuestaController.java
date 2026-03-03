@@ -49,16 +49,11 @@ public class RespuestaController {
         return ResponseEntity.ok(page);
     }
 
-    @Transactional
     @GetMapping("/{id}")
     public ResponseEntity detallar(@PathVariable Long id) {
-        var optionalRespuesta = repository.findById(id);
-
-        if (optionalRespuesta.isPresent()) {
-            var respuesta = optionalRespuesta.get();
-            return ResponseEntity.ok(new DatosDetalleRespuesta(respuesta));
-        }
-        return ResponseEntity.notFound().build();
+        return repository.findById(id)
+                .map(respuesta -> ResponseEntity.ok(new DatosDetalleRespuesta(respuesta)))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @Transactional
