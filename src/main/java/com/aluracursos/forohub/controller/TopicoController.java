@@ -49,7 +49,6 @@ public class TopicoController {
         return ResponseEntity.ok(page);
     }
 
-    @Transactional
     @GetMapping("/{id}")
     public ResponseEntity detallar(@PathVariable Long id) {
         var optionalTopico = repository.findById(id);

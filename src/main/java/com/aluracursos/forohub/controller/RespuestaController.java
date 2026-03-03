@@ -73,12 +73,7 @@ public class RespuestaController {
                 nuevoAutor = usuarioRepository.getReferenceById(datos.idUsuario());
             }
 
-            Topico nuevoTopico = null;
-            if (datos.idTopico() != null) {
-                nuevoTopico = topicoRepository.getReferenceById(datos.idTopico());
-            }
-
-            respuesta.actualizarInformacion(datos, nuevoAutor, nuevoTopico);
+            respuesta.actualizarInformacion(datos, nuevoAutor);
             return ResponseEntity.ok(new DatosDetalleRespuesta(respuesta));
         }
         return ResponseEntity.notFound().build();

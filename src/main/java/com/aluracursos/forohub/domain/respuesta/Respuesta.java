@@ -25,7 +25,7 @@ public class Respuesta {
     @JoinColumn(name = "topico_id")
     private Topico topico;
 
-    private LocalDateTime fechaCreacion = LocalDateTime.now();
+    private LocalDateTime fechaCreacion;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "autor_id")
@@ -41,15 +41,12 @@ public class Respuesta {
         this.solucion = false;
     }
 
-    public void actualizarInformacion(@Valid DatosActualizacionRespuesta datos, Usuario nuevoAutor, Topico nuevoTopico) {
+    public void actualizarInformacion(@Valid DatosActualizacionRespuesta datos, Usuario nuevoAutor) {
         if (datos.mensaje() != null) {
             this.mensaje = datos.mensaje();
         }
         if (nuevoAutor != null) {
             this.autor = nuevoAutor;
-        }
-        if (nuevoTopico != null) {
-            this.topico = nuevoTopico;
         }
         if (datos.solucion() != null) {
             this.solucion = datos.solucion();
