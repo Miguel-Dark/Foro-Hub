@@ -31,10 +31,9 @@ public class Respuesta {
     @JoinColumn(name = "autor_id")
     private Usuario autor;
 
-    private Boolean solucion;
+    private Boolean solucion = false;
 
     public Respuesta(String mensaje, Usuario autor, Topico topico) {
-        this.id = null;
         this.mensaje = mensaje;
         this.autor = autor;
         this.topico = topico;
