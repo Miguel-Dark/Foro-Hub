@@ -61,7 +61,7 @@ public class CursoController {
     @Transactional
     @PutMapping("/{id}")
     public ResponseEntity actualizar(@PathVariable Long id, @RequestBody @Valid DatosActualizacionCurso datos) {
-        var optionalCurso = repository.findById(id);
+        var optionalCurso = cursoRepository.findById(id);
         if (optionalCurso.isPresent()) {
             var curso = optionalCurso.get();
             curso.actualizarInformacion(datos);
