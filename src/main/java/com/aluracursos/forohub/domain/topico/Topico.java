@@ -67,7 +67,7 @@ public class Topico {
         }
     }
 
-//    public void marcarComoSolucionado() {
-//        this.status = StatusTopico.SOLUCIONADO;
-//    }
+    public void marcarComoSolucionado() {
+        this.status = StatusTopico.SOLUCIONADO;
+    }
 }

@@ -57,8 +57,8 @@ public class Respuesta {
         }
     }
 
-//    public void marcarComoSolucion() {
-//        this.solucion = true;
-//        this.topico.marcarComoSolucionado();
-//    }
+    public void marcarComoSolucion() {
+        this.solucion = true;
+        this.topico.marcarComoSolucionado();
+    }
 }
