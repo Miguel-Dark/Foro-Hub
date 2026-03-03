@@ -1,8 +1,11 @@
 package com.aluracursos.forohub.controller;
 
+import com.aluracursos.forohub.domain.curso.Curso;
 import com.aluracursos.forohub.domain.perfil.*;
+import com.aluracursos.forohub.domain.topico.DatosActualizacionTopico;
 import com.aluracursos.forohub.domain.topico.DatosDetalleTopico;
 import com.aluracursos.forohub.domain.usuario.DatosListaUsuario;
+import com.aluracursos.forohub.domain.usuario.Usuario;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -44,6 +47,21 @@ public class PerfilController {
 
         if (optionalPerfil.isPresent()) {
             var perfil = optionalPerfil.get();
+            return ResponseEntity.ok(new DatosDetallePerfil(perfil));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @Transactional
+    @PutMapping("/{id}")
+    public ResponseEntity actualizar(@PathVariable Long id, @RequestBody @Valid DatosActualizarPerfil datos) {
+        var optionalPerfil = repository.findById(id);
+        if (optionalPerfil.isPresent()) {
+            var perfil = optionalPerfil.get();
+
+            // Asumiendo que tu entidad Perfil tiene este método
+            perfil.actualizarInformacion(datos);
+
             return ResponseEntity.ok(new DatosDetallePerfil(perfil));
         }
         return ResponseEntity.notFound().build();
