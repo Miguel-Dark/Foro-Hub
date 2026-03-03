@@ -70,4 +70,8 @@ public class Topico {
     public void marcarComoSolucionado() {
         this.status = StatusTopico.SOLUCIONADO;
     }
+
+    public void cerrarTopico() {
+        this.status = StatusTopico.CERRADO;
+    }
 }

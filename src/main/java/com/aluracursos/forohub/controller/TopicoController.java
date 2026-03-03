@@ -95,4 +95,17 @@ public class TopicoController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @Transactional
+    @PutMapping("/{id}/cerrar")
+    public ResponseEntity cerrar(@PathVariable Long id) {
+        var optionalTopico = repository.findById(id);
+
+        if (optionalTopico.isPresent()) {
+            var topico = optionalTopico.get();
+            topico.cerrarTopico();
+            return ResponseEntity.ok(new DatosDetalleTopico(topico));
+        }
+        return ResponseEntity.notFound().build();
+    }
 }
