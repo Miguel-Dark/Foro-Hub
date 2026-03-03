@@ -5,6 +5,7 @@ import com.aluracursos.forohub.domain.curso.CursoRepository;
 import com.aluracursos.forohub.domain.topico.*;
 import com.aluracursos.forohub.domain.usuario.Usuario;
 import com.aluracursos.forohub.domain.usuario.UsuarioRepository;
+import com.aluracursos.forohub.infra.errores.ValidacionDeIntegridadException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,6 +34,10 @@ public class TopicoController {
     @PostMapping
     public ResponseEntity registrar(@RequestBody @Valid DatosRegistroTopico datos,
                                     UriComponentsBuilder uriComponentsBuilder){
+        // Validación de duplicados meticulosa
+        if (repository.existsByTituloAndMensaje(datos.titulo(), datos.mensaje())) {
+            throw new ValidacionDeIntegridadException("Este tópico ya existe (título y mensaje duplicados)");
+        }
         var usuario = usuarioRepository.getReferenceById(datos.idUsuario());
         var curso = cursoRepository.getReferenceById(datos.idCurso());
         var topico = repository.save(new Topico(datos, usuario, curso));

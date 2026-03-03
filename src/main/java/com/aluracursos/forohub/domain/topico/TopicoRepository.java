@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TopicoRepository extends JpaRepository<Topico, Long> {
     Page<Topico> findAll(Pageable paginacion);
+    boolean existsByTituloAndMensaje(String titulo, String mensaje);
 }
