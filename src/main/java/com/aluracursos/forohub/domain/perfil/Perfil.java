@@ -2,6 +2,7 @@ package com.aluracursos.forohub.domain.perfil;
 
 import com.aluracursos.forohub.domain.usuario.Usuario;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -31,6 +32,13 @@ public class Perfil {
     }
 
     public Perfil(DatosRegistroPerfil datos) {
+
         this.nombre = datos.nombre();
+    }
+
+    public void actualizarInformacion(@Valid DatosActualizarPerfil datos) {
+        if (datos.nombre() != null) {
+            this.nombre = datos.nombre();
+        }
     }
 }

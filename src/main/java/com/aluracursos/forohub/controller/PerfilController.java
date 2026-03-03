@@ -58,8 +58,6 @@ public class PerfilController {
         var optionalPerfil = repository.findById(id);
         if (optionalPerfil.isPresent()) {
             var perfil = optionalPerfil.get();
-
-            // Asumiendo que tu entidad Perfil tiene este método
             perfil.actualizarInformacion(datos);
 
             return ResponseEntity.ok(new DatosDetallePerfil(perfil));
