@@ -39,4 +39,20 @@ public class CursoController {
         var page = cursoRepository.findAllByActivoTrue(paginacion).map(DatosListaCurso::new);
         return ResponseEntity.ok(page);
     }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<Page<DatosListaCurso>> filtrar(@RequestParam CategoriaCurso categoria,
+                                                         @PageableDefault(size = 5) Pageable paginacion) {
+        var filtrados = cursoRepository.findAllByActivoTrueAndCategoria(categoria, paginacion)
+                .map(DatosListaCurso::new);
+        return ResponseEntity.ok(filtrados);
+    }
+
+//    @Transactional
+//    @GetMapping("/{id}")
+//    public ResponseEntity detallar(@PathVariable Long id) {
+//        return cursoRepository.findById(id)
+//                .map(curso -> ResponseEntity.ok(new DatosDetalleCurso(curso)))
+//                .orElse(ResponseEntity.notFound().build());
+//    }
 }
