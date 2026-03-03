@@ -48,11 +48,11 @@ public class CursoController {
         return ResponseEntity.ok(filtrados);
     }
 
-//    @Transactional
-//    @GetMapping("/{id}")
-//    public ResponseEntity detallar(@PathVariable Long id) {
-//        return cursoRepository.findById(id)
-//                .map(curso -> ResponseEntity.ok(new DatosDetalleCurso(curso)))
-//                .orElse(ResponseEntity.notFound().build());
-//    }
+    @Transactional
+    @GetMapping("/{id}")
+    public ResponseEntity detallar(@PathVariable Long id) {
+        return cursoRepository.findById(id)
+                .map(curso -> ResponseEntity.ok(new DatosDetalleCurso(curso)))
+                .orElse(ResponseEntity.notFound().build());
+    }
 }
