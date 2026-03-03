@@ -7,5 +7,4 @@ public record DatosRegistroCurso(
         @NotBlank String nombre,
         @NotNull CategoriaCurso categoria
 
-) {
-}
+) {}

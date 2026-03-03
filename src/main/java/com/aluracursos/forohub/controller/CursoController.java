@@ -2,6 +2,7 @@ package com.aluracursos.forohub.controller;
 
 import com.aluracursos.forohub.domain.curso.*;
 import com.aluracursos.forohub.domain.topico.DatosDetalleTopico;
+import com.aluracursos.forohub.domain.topico.DatosListaTopico;
 import com.aluracursos.forohub.domain.topico.Topico;
 import com.aluracursos.forohub.domain.topico.TopicoRepository;
 import com.aluracursos.forohub.domain.usuario.UsuarioRepository;
@@ -9,6 +10,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +34,9 @@ public class CursoController {
     }
 
     @GetMapping
-    public Page<DatosListaCurso> listar(@PageableDefault(size=10, sort={"nombre"}) Pageable paginacion) {
-        return cursoRepository.findAll(paginacion).map(DatosListaCurso::new);
+    public ResponseEntity<Page<DatosListaCurso>> listar(@PageableDefault(size=10,
+            sort={"nombre"}, direction = Sort.Direction.ASC) Pageable paginacion) {
+        var page = cursoRepository.findAllByActivoTrue(paginacion).map(DatosListaCurso::new);
+        return ResponseEntity.ok(page);
     }
 }
