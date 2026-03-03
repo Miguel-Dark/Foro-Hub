@@ -70,4 +70,16 @@ public class CursoController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @Transactional
+    @DeleteMapping("/{id}")
+    public ResponseEntity eliminar(@PathVariable Long id) {
+        var optionalCurso = cursoRepository.findById(id);
+        if (optionalCurso.isPresent()) {
+            var curso = optionalCurso.get();
+            curso.eliminarLogico();
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
 }

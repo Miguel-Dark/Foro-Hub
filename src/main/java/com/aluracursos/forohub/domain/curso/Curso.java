@@ -21,6 +21,7 @@ public class Curso {
 
     @Enumerated(EnumType.STRING)
     private CategoriaCurso categoria;
+    private boolean activo;
 
     public Curso(DatosRegistroCurso datos) {
         this.id = null;
@@ -35,5 +36,9 @@ public class Curso {
         if (datos.categoria() != null) {
             this.categoria = datos.categoria();
         }
+    }
+
+    public void eliminarLogico() {
+        this.activo = false;
     }
 }
