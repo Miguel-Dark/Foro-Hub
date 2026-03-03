@@ -5,5 +5,8 @@ public enum CategoriaCurso {
     FRONTEND,
     BACKEND,
     DATA_SCIENCE,
-    DEVOPS
+    INTELIGENCIA_ARTIFICIAL,
+    DEVOPS,
+    INNOVACION_Y_GESTION
 }
+
