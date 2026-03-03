@@ -27,7 +27,9 @@ public class Topico {
     private String titulo;
     private String mensaje;
     private LocalDateTime fechaCreacion;
-    private Boolean status;
+
+    @Enumerated(EnumType.STRING)
+    private StatusTopico status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "autor_id")
@@ -45,7 +47,7 @@ public class Topico {
         this.titulo = datos.titulo();
         this.mensaje = datos.mensaje();
         this.fechaCreacion = LocalDateTime.now();
-        this.status = true;
+        this.status = StatusTopico.ABIERTO;
         this.autor = usuario;
         this.curso = curso;
     }
@@ -64,4 +66,8 @@ public class Topico {
             this.curso = nuevoCurso;
         }
     }
+
+//    public void marcarComoSolucionado() {
+//        this.status = StatusTopico.SOLUCIONADO;
+//    }
 }
