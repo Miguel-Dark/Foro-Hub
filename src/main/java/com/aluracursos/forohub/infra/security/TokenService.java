@@ -17,8 +17,11 @@ public class TokenService {
 
     private static final String ISSUER = "ForoHub";
 
-    @Value("${api.security.secret}")
+    @Value("${jwt.secret}")
     private String apiSecret;
+
+    @Value("${jwt.expiration.hours}")
+    private Integer horasExpiracion;
 
     public String generarToken(Usuario usuario) {
         try {
@@ -34,7 +37,7 @@ public class TokenService {
     }
 
     private Instant generarFechaExpiracion() {
-        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-06:00"));
+        return LocalDateTime.now().plusHours(horasExpiracion).toInstant(ZoneOffset.of("-06:00"));
     }
 
     public String getSubject(String tokenJWT) {
