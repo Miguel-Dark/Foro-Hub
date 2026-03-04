@@ -1,4 +1,4 @@
 package com.aluracursos.forohub.infra.security;
 
-public record DatosTokenJWT(String token) {
+public record DatosTokenJWT(String token, String type) {
 }

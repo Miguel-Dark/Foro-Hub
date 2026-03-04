@@ -13,10 +13,10 @@ public class ForohubApplication {
 		SpringApplication.run(ForohubApplication.class, args);
 	}
 
-    @Bean
-    public CommandLineRunner generator() {
-        return args -> {
-            System.out.println("🔐 HASH BCRYPT: " + new BCryptPasswordEncoder().encode("123456"));
-        };
-    }
+//    @Bean
+//    public CommandLineRunner generator() {
+//        return args -> {
+//            System.out.println("HASH BCRYPT: " + new BCryptPasswordEncoder().encode("123456"));
+//        };
+//    }
 }
