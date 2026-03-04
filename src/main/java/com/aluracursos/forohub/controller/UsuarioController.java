@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -25,15 +26,27 @@ public class UsuarioController {
     @Autowired
     private PerfilRepository perfilRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Transactional
     @PostMapping
     public ResponseEntity registrar(@RequestBody @Valid DatosRegistroUsuario datos,
                                     UriComponentsBuilder uriComponentsBuilder){
         var perfilUsuario = perfilRepository.findByNombre("USUARIO");
-        var usuario = repository.save(new Usuario(datos, List.of(perfilUsuario)));
+
+        String contrasenaEncriptada = passwordEncoder.encode(datos.contrasena());
+
+        var datosConClaveHaseada = new DatosRegistroUsuario(
+                datos.nombre(),
+                datos.email(),
+                contrasenaEncriptada,
+                datos.idPerfil()
+        );
+
+        var usuario = repository.save(new Usuario(datosConClaveHaseada, List.of(perfilUsuario)));
 
         var uri = uriComponentsBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
-
         return ResponseEntity.created(uri).body(new DatosDetalleUsuario(usuario));
     }
 
