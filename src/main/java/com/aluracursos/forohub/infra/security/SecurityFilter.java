@@ -23,19 +23,38 @@ public class SecurityFilter extends OncePerRequestFilter {
     private TokenService tokenService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
         var tokenJWT = recuperarToken(request);
-        if (tokenJWT != null){
-            var subject = tokenService.getSubject(tokenJWT);
-            var usuario = usuarioRepository.findByEmail(subject);
 
+        try {
+            if (tokenJWT != null) {
+                var subject = tokenService.getSubject(tokenJWT);
+                var usuario = usuarioRepository.findByEmail(subject);
 
-            var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
+                var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+            filterChain.doFilter(request, response);
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+        } catch (RuntimeException e) {
+
+            System.out.println(">>> ⚠️ Error de autenticación: " + e.getMessage());
+
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+
+            String jsonResponse = """
+                {
+                    "status": 403,
+                    "error": "Acceso Prohibido",
+                    "causa": "Token inválido o expirado",
+                    "recomendacion": "Por favor, vuelve a iniciar sesión para obtener un nuevo token."
+                }
+                """;
+            response.getWriter().write(jsonResponse);
         }
-
-        filterChain.doFilter(request, response);
     }
 
     private String recuperarToken(HttpServletRequest request) {
