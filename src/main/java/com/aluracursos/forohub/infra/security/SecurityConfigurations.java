@@ -31,12 +31,15 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(req -> {
                     // 1. Autenticación (Público)
                     req.requestMatchers(HttpMethod.POST, "/auth").permitAll();
+                    req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
                     // 2. LISTAR (GET /topicos) - Cualquiera autenticado (Estudiante o Instructor)
                     req.requestMatchers(HttpMethod.GET, "/topicos").authenticated();
                     // 3. DETALLAR (GET /topicos/{id}) - Cualquiera autenticado
                     req.requestMatchers(HttpMethod.GET, "/topicos/*").authenticated();
                     // 4. REGISTRAR (POST /topicos) - Solo ESTUDIANTE (Las dudas las crean ellos)
                     req.requestMatchers(HttpMethod.POST, "/topicos").hasAuthority("ESTUDIANTE");
+                    // 7. CERRAR (PUT /topicos/{id}/cerrar) - Solo INSTRUCTOR (Ellos resuelven)
+                    req.requestMatchers(HttpMethod.PUT, "/topicos/*/cerrar").hasAuthority("INSTRUCTOR");
                     // 5. ACTUALIZAR (PUT /topicos/{id}) - Solo ESTUDIANTE (El autor edita su duda)
                     req.requestMatchers(HttpMethod.PUT, "/topicos/*").hasAuthority("ESTUDIANTE");
                     // 6. ELIMINAR (DELETE /topicos/{id}) - Solo INSTRUCTOR (Moderación)
