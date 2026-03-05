@@ -8,14 +8,16 @@ public record DatosListaUsuario(
         Long id,
         String nombre,
         String email,
-        List<Perfil> perfiles
+        List<String> perfiles
 ) {
     public DatosListaUsuario(Usuario usuario) { //constructor
         this(
                 usuario.getId(),
                 usuario.getNombre(),
                 usuario.getEmail(),
-                usuario.getPerfiles()
+                usuario.getPerfiles().stream()
+                        .map(Perfil::getNombre)
+                        .toList()
         );
     }
 }

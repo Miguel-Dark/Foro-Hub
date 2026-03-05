@@ -11,7 +11,10 @@ public record DatosDetalleUsuario(
                 usuario.getId(),
                 usuario.getNombre(),
                 usuario.getEmail(),
-                usuario.getPerfiles().get(0).getNombre()
+                usuario.getPerfiles().stream()
+                        .findFirst()
+                        .map(perfil -> perfil.getNombre())
+                        .orElse("SIN_PERFIL")
         );
     }
 }
