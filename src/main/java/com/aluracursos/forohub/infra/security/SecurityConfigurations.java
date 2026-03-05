@@ -44,8 +44,6 @@ public class SecurityConfigurations {
                     req.requestMatchers(HttpMethod.PUT, "/topicos/*").hasAuthority("ESTUDIANTE");
                     // 6. ELIMINAR (DELETE /topicos/{id}) - Solo INSTRUCTOR (Moderación)
                     req.requestMatchers(HttpMethod.DELETE, "/topicos/*").hasAuthority("INSTRUCTOR");
-                    // 7. CERRAR (PUT /topicos/{id}/cerrar) - Solo INSTRUCTOR (Ellos resuelven)
-                    req.requestMatchers(HttpMethod.PUT, "/topicos/*/cerrar").hasAuthority("INSTRUCTOR");
                     req.anyRequest().authenticated();
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
