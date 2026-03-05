@@ -6,6 +6,7 @@ import com.aluracursos.forohub.domain.topico.*;
 import com.aluracursos.forohub.domain.usuario.Usuario;
 import com.aluracursos.forohub.domain.usuario.UsuarioRepository;
 import com.aluracursos.forohub.infra.errores.ValidacionDeIntegridadException;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/topicos")
+@SecurityRequirement(name = "bearer-key")
 public class TopicoController {
 
     @Autowired

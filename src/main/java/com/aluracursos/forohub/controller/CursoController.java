@@ -8,6 +8,7 @@ import com.aluracursos.forohub.domain.topico.DatosListaTopico;
 import com.aluracursos.forohub.domain.topico.Topico;
 import com.aluracursos.forohub.domain.topico.TopicoRepository;
 import com.aluracursos.forohub.domain.usuario.UsuarioRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +22,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/cursos")
+@SecurityRequirement(name = "bearer-key")
 public class CursoController {
 
     @Autowired
