@@ -95,7 +95,7 @@ public class TopicoController {
 
         if (topico.isPresent()) {
             repository.deleteById(id);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();
     }
