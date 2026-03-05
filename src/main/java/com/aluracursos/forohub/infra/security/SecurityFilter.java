@@ -39,7 +39,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         } catch (RuntimeException e) {
 
-            System.out.println(">>> ⚠️ Error de autenticación: " + e.getMessage());
+            System.out.println(">>> Error de autenticación: " + e.getMessage());
 
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.setContentType("application/json");
