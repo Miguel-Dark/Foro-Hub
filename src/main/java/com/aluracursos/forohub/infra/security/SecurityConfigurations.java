@@ -29,8 +29,20 @@ public class SecurityConfigurations {
         return http.csrf(csrf -> csrf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
+                    // 1. Autenticación (Público)
                     req.requestMatchers(HttpMethod.POST, "/auth").permitAll();
-                    req.requestMatchers(HttpMethod.GET, "/topicos").permitAll();
+                    // 2. LISTAR (GET /topicos) - Cualquiera autenticado (Estudiante o Instructor)
+                    req.requestMatchers(HttpMethod.GET, "/topicos").authenticated();
+                    // 3. DETALLAR (GET /topicos/{id}) - Cualquiera autenticado
+                    req.requestMatchers(HttpMethod.GET, "/topicos/*").authenticated();
+                    // 4. REGISTRAR (POST /topicos) - Solo ESTUDIANTE (Las dudas las crean ellos)
+                    req.requestMatchers(HttpMethod.POST, "/topicos").hasAuthority("ESTUDIANTE");
+                    // 5. ACTUALIZAR (PUT /topicos/{id}) - Solo ESTUDIANTE (El autor edita su duda)
+                    req.requestMatchers(HttpMethod.PUT, "/topicos/*").hasAuthority("ESTUDIANTE");
+                    // 6. ELIMINAR (DELETE /topicos/{id}) - Solo INSTRUCTOR (Moderación)
+                    req.requestMatchers(HttpMethod.DELETE, "/topicos/*").hasAuthority("INSTRUCTOR");
+                    // 7. CERRAR (PUT /topicos/{id}/cerrar) - Solo INSTRUCTOR (Ellos resuelven)
+                    req.requestMatchers(HttpMethod.PUT, "/topicos/*/cerrar").hasAuthority("INSTRUCTOR");
                     req.anyRequest().authenticated();
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
