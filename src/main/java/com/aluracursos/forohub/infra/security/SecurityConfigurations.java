@@ -53,7 +53,14 @@ public class SecurityConfigurations {
         return (request, response, authException) -> {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.setContentType("application/json");
-            response.getWriter().write("{\"mensaje\": \"Acceso denegado. No tienes permisos para esta operacion o el token es invalido.\"}");
+
+            String json = String.format(
+                    "{\"timestamp\": \"%s\", \"status\": 403, \"error\": \"Forbidden\", \"message\": \"Access Denied\", \"path\": \"%s\"}",
+                    java.time.Instant.now(),
+                    request.getRequestURI()
+            );
+
+            response.getWriter().write(json);
         };
     }
 }
