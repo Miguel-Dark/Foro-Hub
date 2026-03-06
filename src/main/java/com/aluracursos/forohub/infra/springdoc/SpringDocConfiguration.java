@@ -18,7 +18,7 @@ public class SpringDocConfiguration {
                                 new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT"))
                 )
                 .info(new Info()
-                        .title("ForoHub Chellenge - API Rest")
+                        .title("ForoHub Challenge - API Rest")
                         .description("API Rest para el foro de dudas de Alura, con funcionalidades CRUD de tópicos, gestión de respuestas y control de acceso por roles (Estudiante e Instructor).")
                         .contact(new Contact()
                                 .name("Miguel-Dark")
