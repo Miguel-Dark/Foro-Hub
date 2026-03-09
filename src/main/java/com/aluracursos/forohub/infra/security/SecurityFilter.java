@@ -45,14 +45,18 @@ public class SecurityFilter extends OncePerRequestFilter {
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
 
-            String jsonResponse = """
-                {
-                    "status": 403,
-                    "error": "Acceso Prohibido",
-                    "causa": "Token inválido o expirado",
-                    "recomendacion": "Por favor, vuelve a iniciar sesión para obtener un nuevo token."
-                }
-                """;
+            String jsonResponse = String.format(
+                    "{\"status\": 403, \"error\": \"Acceso Prohibido\", \"mensaje\": \"Token inválido o expirado\", \"marca\": \"Miguel-Dark\", \"path\": \"%s\"}",
+                    request.getRequestURI()
+            );
+//                """
+//                {
+//                    "status": 403,
+//                    "error": "Acceso Prohibido",
+//                    "causa": "Token inválido o expirado",
+//                    "recomendacion": "Por favor, vuelve a iniciar sesión para obtener un nuevo token."
+//                }
+//                """;
             response.getWriter().write(jsonResponse);
         }
     }
