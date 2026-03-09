@@ -36,7 +36,6 @@ public class TopicoController {
     @PostMapping
     public ResponseEntity registrar(@RequestBody @Valid DatosRegistroTopico datos,
                                     UriComponentsBuilder uriComponentsBuilder){
-        // Validación de duplicados meticulosa
         if (repository.existsByTituloAndMensaje(datos.titulo(), datos.mensaje())) {
             throw new ValidacionDeIntegridadException("Este tópico ya existe (título y mensaje duplicados)");
         }
@@ -110,6 +109,19 @@ public class TopicoController {
         if (optionalTopico.isPresent()) {
             var topico = optionalTopico.get();
             topico.cerrarTopico();
+            return ResponseEntity.ok(new DatosDetalleTopico(topico));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @Transactional
+    @PutMapping("/{id}/solucionar")
+    public ResponseEntity solucionar(@PathVariable Long id) {
+        var optionalTopico = repository.findById(id);
+
+        if (optionalTopico.isPresent()) {
+            var topico = optionalTopico.get();
+            topico.marcarComoSolucionado();
             return ResponseEntity.ok(new DatosDetalleTopico(topico));
         }
         return ResponseEntity.notFound().build();
