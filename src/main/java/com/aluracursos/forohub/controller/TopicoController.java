@@ -126,4 +126,13 @@ public class TopicoController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/filtrar")
+    public ResponseEntity<Page<DatosListaTopico>> filtrarPorStatus(
+            @RequestParam StatusTopico status,
+            @PageableDefault(size = 10) Pageable paginacion) {
+
+        var page = repository.findAllByStatus(status, paginacion).map(DatosListaTopico::new);
+        return ResponseEntity.ok(page);
+    }
 }

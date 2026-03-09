@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface TopicoRepository extends JpaRepository<Topico, Long> {
     Page<Topico> findAll(Pageable paginacion);
@@ -15,4 +17,6 @@ public interface TopicoRepository extends JpaRepository<Topico, Long> {
 
     @Query("SELECT COUNT(t) FROM Topico t WHERE t.respuestas IS EMPTY")
     long countBySinRespuestas();
+
+    Page<Topico> findAllByStatus(StatusTopico status, Pageable paginacion);
 }
