@@ -20,11 +20,10 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     long countSolucionesPorUsuario(Long usuarioId);
 
     @Query("""
-    SELECT u FROM Usuario u 
-    JOIN u.respuestas r 
-    WHERE r.solucion = true 
-    GROUP BY u 
+    SELECT r.autor FROM Respuesta r
+    WHERE r.solucion = true
+    GROUP BY r.autor
     ORDER BY COUNT(r) DESC
-    """)
+""")
     List<Usuario> findTop3BySoluciones(Pageable pageable);
 }

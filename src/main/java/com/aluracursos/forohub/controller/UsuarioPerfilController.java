@@ -30,7 +30,6 @@ public class UsuarioPerfilController {
         var topicos = usuarioRepository.countTopicosPorUsuario(id);
         var soluciones = usuarioRepository.countSolucionesPorUsuario(id);
 
-        // Lógica de Gamificación (Rango)
         String rango = (soluciones >= 5) ? "Instructor Senior" :
                 (soluciones >= 1) ? "Colaborador Destacado" : "Estudiante Activo";
 
@@ -51,16 +50,18 @@ public class UsuarioPerfilController {
 
     @GetMapping("/ranking")
     public ResponseEntity obtenerRanking() {
-        var top3 = usuarioRepository.findTop3BySoluciones(PageRequest.of(0, 3));
-
-        var ranking = top3.stream().map(u -> {
-            var soluciones = usuarioRepository.countSolucionesPorUsuario(u.getId());
-            return Map.of(
-                    "nombre", u.getNombre(),
-                    "medallas", soluciones,
-                    "marca", "Miguel-Dark"
-            );
-        }).toList();
+        var ranking = usuarioRepository.findAll().stream()
+                .map(u -> {
+                    var soluciones = usuarioRepository.countSolucionesPorUsuario(u.getId());
+                    return Map.of(
+                            "nombre", u.getNombre(),
+                            "medallas", soluciones,
+                            "marca", "Miguel-Dark"
+                    );
+                })
+                .sorted((m1, m2) -> ((Long) m2.get("medallas")).compareTo((Long) m1.get("medallas")))
+                .limit(3)
+                .toList();
 
         return ResponseEntity.ok(ranking);
     }

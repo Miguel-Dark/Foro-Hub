@@ -29,22 +29,40 @@ public class SecurityConfigurations {
         return http.csrf(csrf -> csrf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
+                    // 1. ACCESO PÚBLICO
                     req.requestMatchers(HttpMethod.POST, "/auth").permitAll();
                     req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
                     req.requestMatchers(HttpMethod.GET, "/estadisticas").permitAll();
 
+                    // 2. TÓPICOS Y SOLUCIONES
                     req.requestMatchers(HttpMethod.PUT, "/topicos/*/cerrar", "/topicos/*/solucionar", "/soluciones/*")
                             .hasAnyAuthority("ESTUDIANTE", "INSTRUCTOR");
-
-                    req.requestMatchers("/perfiles/**").authenticated();
-
                     req.requestMatchers(HttpMethod.POST, "/topicos").hasAuthority("ESTUDIANTE");
-                    req.requestMatchers(HttpMethod.DELETE, "/topicos/*").hasAuthority("INSTRUCTOR");
-
                     req.requestMatchers(HttpMethod.PUT, "/topicos/*").hasAuthority("ESTUDIANTE");
-
-                    // 4. LO GENERAL (Solo estar logueado)
+                    req.requestMatchers(HttpMethod.DELETE, "/topicos/*").hasAuthority("INSTRUCTOR");
                     req.requestMatchers(HttpMethod.GET, "/topicos", "/topicos/*").authenticated();
+
+                    // 3. RESPUESTAS
+                    req.requestMatchers(HttpMethod.DELETE, "/respuestas/*").hasAuthority("INSTRUCTOR");
+                    req.requestMatchers(HttpMethod.PUT, "/respuestas/*").hasAuthority("ESTUDIANTE");
+                    req.requestMatchers("/respuestas/**").authenticated();
+
+                    // 4. CURSOS
+                    req.requestMatchers(HttpMethod.POST, "/cursos").hasAuthority("INSTRUCTOR");
+                    req.requestMatchers(HttpMethod.PUT, "/cursos/*").hasAuthority("INSTRUCTOR");
+                    req.requestMatchers(HttpMethod.DELETE, "/cursos/*").hasAuthority("INSTRUCTOR");
+                    req.requestMatchers(HttpMethod.GET, "/cursos", "/cursos/*").authenticated();
+
+                    // 5. USUARIOS (Gestión de cuentas)
+                    req.requestMatchers(HttpMethod.POST, "/usuarios").hasAuthority("INSTRUCTOR");
+                    req.requestMatchers(HttpMethod.DELETE, "/usuarios/*").hasAuthority("INSTRUCTOR");
+                    req.requestMatchers(HttpMethod.PUT, "/usuarios/*").hasAnyAuthority("ESTUDIANTE", "INSTRUCTOR");
+                    req.requestMatchers("/usuarios/**").authenticated();
+
+                    // 6. PERFILES (Ranking y Detalle de usuario)
+                    req.requestMatchers("/perfiles/usuario/**").authenticated();
+
+                    // 7. SEGURIDAD GLOBAL
                     req.anyRequest().authenticated();
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
