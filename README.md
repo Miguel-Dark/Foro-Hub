@@ -1,82 +1,73 @@
-# Spring Framework Challenge - ForoHub
+# 🏛️ ForoHub: Backend Engineering Excellence
+### By Miguel Ángel de la Cruz Lázaro
 
 <p align="center">
-  <img src="assets/banner-forohub.png" alt="ForoHub Banner" width="100%">
+  <img src="assets/banner_forohub.png" alt="ForoHub Banner" width="100%">
 </p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Java-17-orange?style=for-the-badge&logo=java" alt="Java">
-  <img src="https://img.shields.io/badge/Spring_Boot-3.4.3-brightgreen?style=for-the-badge&logo=spring-boot" alt="Spring Boot">
-  <img src="https://img.shields.io/badge/PostgreSQL-17-blue?style=for-the-badge&logo=postgresql" alt="PostgreSQL">
-  <img src="https://img.shields.io/badge/Maven-4.0-red?style=for-the-badge&logo=apache-maven" alt="Maven">
-  <img src="https://img.shields.io/badge/Spring_Security-6.0-green?style=for-the-badge&logo=spring-security" alt="Spring Security">
-</p>
-
-##  Descripción del Proyecto
-
-**ForoHub** es una solución Backend desarrollada bajo el ecosistema de Spring Framework, diseñada para la gestión integral de un foro de discusión técnico. El proyecto cumple con los requerimientos del Challenge de Alura Latam y Oracle Next Education (ONE), implementando un sistema persistente para la administración de tópicos, respuestas, usuarios y cursos.
-
-La aplicación garantiza la integridad de los datos mediante validaciones estrictas y un sistema de seguridad robusto que protege la información sensible y restringe el acceso según el rol del usuario (Estudiante o Instructor).
-
-##  Demostración y Pruebas (Video)
-
-<p align="center">
-  <table border="0">
-    <tr>
-      <td align="center"><b>1. Gestión de Tópicos</b></td>
-      <td align="center"><b>2. Seguridad y JWT</b></td>
-      <td align="center"><b>3. Administración de Usuarios</b></td>
-    </tr>
-    <tr>
-      <td align="center"><a href="URL_VIDEO_1"><img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Video 1"></a></td>
-      <td align="center"><a href="URL_VIDEO_2"><img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Video 2"></a></td>
-      <td align="center"><a href="URL_VIDEO_3"><img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Video 3"></a></td>
-    </tr>
-    <tr>
-      <td align="center"><b>4. Cursos y Respuestas</b></td>
-    </tr>
-    <tr>
-      <td align="center"><a href="URL_VIDEO_4"><img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Video 4"></a></td>
-    </tr>
-  </table>
-</p>
-
-##  Stack Tecnológico
-
-* **Lenguaje:** Java 17 (JDK)
-* **Framework:** Spring Boot 3.4.3
-* **Gestión de Dependencias:** Maven
-* **Base de Datos:** PostgreSQL 17
-* **Persistencia:** Spring Data JPA
-* **Migraciones:** Flyway
-* **Seguridad:** Spring Security (Stateless) con autenticación JWT
-* **Documentación:** Swagger / OpenAPI
-* **Cliente de Pruebas:** Insomnia
-
-##  Implementación de Seguridad
-
-La seguridad se basa en una arquitectura de autenticación **Stateless** mediante tokens JWT. Se han definido permisos granulares para garantizar que cada recurso sea accedido únicamente por los perfiles autorizados:
-
-* **Consultas (GET):** Acceso permitido a cualquier usuario autenticado.
-* **Gestión de Tópicos (POST/PUT):** Exclusivo para el rol de Estudiante e Instructor.
-* **Moderación y Administración (DELETE):** Acceso restringido únicamente al rol de Instructor.
-* **Gestión de Cursos y Usuarios:** Rutas administrativas protegidas bajo autoridad de Instructor.
-
-##  Arquitectura de Datos
-
-El diseño de la base de datos sigue el modelo relacional, utilizando **PostgreSQL** y **Flyway** para el control de versiones del esquema. Esto asegura que la base de datos sea escalable y fácil de mantener a medida que el foro crece.
-
-##  Instalación y Uso
-
-1. Clonar el repositorio.
-2. Crear la base de datos en PostgreSQL.
-3. Configurar las credenciales de acceso en el archivo de propiedades del proyecto.
-4. Ejecutar el comando: `mvn spring-boot:run`
 
 ---
 
-## ‍ Autor
+## 📽️ Portafolio de Implementación (Video Demos)
+*Haz clic en las insignias para ver la ejecución técnica en Insomnia:*
 
-Desarrollado por **Miguel Àngel de la Cruz Làzaro**.
+### 📂 Gestión de Núcleo
+> **Video 1: Corazón y Reglas de Negocio** > CRUD completo de Tópicos, validaciones de Trello y manejo de roles.  
+> [![Ver Demo 1](https://img.shields.io/badge/EJECUTAR_DEMO_01-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/gDr9i5kYcsk)
 
+### 🔐 Capa de Seguridad
+> **Video 2: Blindaje Spring Security & JWT** > Demostración de autenticación Stateless y protección de endpoints.  
+> [![Ver Demo 2](https://img.shields.io/badge/EJECUTAR_DEMO_02-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/jN9BPTK6T_A)
 
+### 👤 Administración de Entidades
+> **Video 3: Usuarios, Cursos y BCrypt** > Gestión de perfiles y persistencia de seguridad en base de datos.  
+> [![Ver Demo 3](https://img.shields.io/badge/EJECUTAR_DEMO_03-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/puCDjZjR4w4)
+
+### 🧠 Lógica de Dominio Avanzada
+> **Video 4: Ciclo de Vida y Soluciones** > Interacción entre respuestas, estados dinámicos y lógica de negocio.  
+> [![Ver Demo 4](https://img.shields.io/badge/EJECUTAR_DEMO_04-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/x7l4goOg764)
+
+### 🏆 Cierre de Proyecto
+> **Video 5: Perfiles, Métricas Públicas y DB Final** > Resumen de estadísticas, acceso PermitAll y esquema PostgreSQL.  
+> [![Ver Demo 5](https://img.shields.io/badge/VER_CIERRE_MAESTRO-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/sjPwkXBKvrk)
+
+---
+
+## 🛡️ El Miguel-Dark Shield (Ciberseguridad)
+No es solo código, es blindaje profesional. He implementado:
+
+* **Anti-Injection Layer:** Uso estricto de **Prepared Statements** mediante Spring Data JPA para neutralizar SQL Injection. 🐘
+* **Gatekeeper Validation:** Filtro de integridad con **Hibernate Validator** (@NotBlank, @Valid) para detener datos corruptos en la entrada. 📝
+* **Stateless Fortress:** Arquitectura de seguridad basada en **JWT Tokens**, eliminando la vulnerabilidad de sesiones. 🔐
+* **Data Integrity:** Migraciones controladas con **Flyway**, asegurando que la base de datos sea una bóveda inmutable. 🏗️
+* **Information Exposure Control:** Centralización de errores con `@RestControllerAdvice` para ocultar Stack Traces sensibles. 🛡️
+
+---
+
+## 🚀 Funcionalidades de Alto Nivel
+
+### 🧩 Gamificación & Lógica Pro
+* **Ranking Dinámico:** Sistema que asigna rangos (Estudiante, Colaborador, Instructor Senior) según el impacto del usuario.
+* **Sincronización de Estados:** Al marcar una "Respuesta Ganadora", el sistema dispara un evento atómico que actualiza el Tópico a **SOLUCIONADO**.
+* **Soft Delete:** Implementación de borrado lógico en Perfiles y Cursos para auditoría e integridad histórica. ♻️
+
+### 🏗️ Arquitectura DDD Lite
+Dividida para escalabilidad:
+1.  **Domain:** Entidades puras con lógica de negocio encapsulada.
+2.  **Controller:** Interfaz REST con 9 puntos de entrada optimizados.
+3.  **Infra:** Persistencia en PostgreSQL y documentación con Swagger.
+
+---
+
+## 🛠️ Stack Tecnológico
+* **Java 17 / Spring Boot 3.4.3**
+* **PostgreSQL 17 / Spring Data JPA**
+* **Spring Security & JWT**
+* **Flyway / Maven / Lombok**
+* **Swagger (OpenAPI) / Insomnia**
+
+---
+
+## 🏁 Conclusión
+Este proyecto representa la culminación técnica de mi paso por **Oracle Next Education** y **Alura Latam**. Es una muestra de arquitectura Backend lista para producción.
+
+**Desarrollado con precisión por:** **Miguel Ángel de la Cruz Lázaro**
