@@ -1,8 +1,37 @@
-#  ForoHub: Backend Engineering Excellence
+#  Spring Framework: Challenge Foro Hub
 ### By Miguel Ángel de la Cruz Lázaro
 
 <p align="center">
   <img src="assets/banner-forohub.png" alt="ForoHub Banner" width="100%">
+</p>
+
+---
+
+### 📝 Descripción del Proyecto
+**ForoHub** es una solución Backend robusta diseñada para gestionar un foro de discusión dinámico. El proyecto nace como un desafío de **Alura Latam**, donde el objetivo principal fue aplicar conocimientos avanzados de **Java y Spring Boot** para crear una API REST escalable. 
+
+Esta API integra capas de seguridad industrial, migraciones de base de datos automatizadas y una lógica de negocio que garantiza la integridad de la información, reflejando un desarrollo orientado a la **Engineering Excellence**.
+
+### 🛠️ Tech Stack & Initializr Dependencies
+
+**Core Engine & Environment:**
+<p align="left">
+  <img src="https://img.shields.io/badge/Java_17+-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 17">
+  <img src="https://img.shields.io/badge/Spring_Boot_3.4.3-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white" alt="Spring Boot 3.4.3">
+  <img src="https://img.shields.io/badge/Maven_4-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white" alt="Maven 4">
+  <img src="https://img.shields.io/badge/IntelliJ_IDEA-000000?style=for-the-badge&logo=intellij-idea&logoColor=white" alt="IntelliJ">
+</p>
+
+**Project Dependencies (Spring Initializr):**
+<p align="left">
+  <img src="https://img.shields.io/badge/Spring_Web-6DB33F?style=flat-square&logo=spring&logoColor=white" alt="Web">
+  <img src="https://img.shields.io/badge/Spring_Data_JPA-6DB33F?style=flat-square&logo=spring&logoColor=white" alt="JPA">
+  <img src="https://img.shields.io/badge/Spring_Security-6DB33F?style=flat-square&logo=spring-security&logoColor=white" alt="Security">
+  <img src="https://img.shields.io/badge/PostgreSQL_Driver-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="Postgres">
+  <img src="https://img.shields.io/badge/Flyway_Migration-CC0202?style=flat-square&logo=flyway&logoColor=white" alt="Flyway">
+  <img src="https://img.shields.io/badge/Lombok-BC133E?style=flat-square&logo=lombok&logoColor=white" alt="Lombok">
+  <img src="https://img.shields.io/badge/Validation-5849BE?style=flat-square&logo=hibernate&logoColor=white" alt="Validation">
+  <img src="https://img.shields.io/badge/DevTools-6DB33F?style=flat-square&logo=spring&logoColor=white" alt="DevTools">
 </p>
 
 ---
