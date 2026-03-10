@@ -34,12 +34,9 @@ La aplicación garantiza la integridad de los datos mediante validaciones estric
     </tr>
     <tr>
       <td align="center"><b>4. Cursos y Respuestas</b></td>
-      <td align="center"><b>Documentación</b></td>
     </tr>
     <tr>
       <td align="center"><a href="URL_VIDEO_4"><img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Video 4"></a></td>
-      <td align="center"><a href="URL_VIDEO_5"><img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Video 5"></a></td>
-      <td align="center"><i>Próximamente</i></td>
     </tr>
   </table>
 </p>
