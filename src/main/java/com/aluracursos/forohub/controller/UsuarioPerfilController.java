@@ -31,8 +31,8 @@ public class UsuarioPerfilController {
         var soluciones = usuarioRepository.countSolucionesPorUsuario(id);
 
         // Lógica de Gamificación (Rango)
-        String rango = (soluciones >= 5) ? "Instructor Senior ⭐" :
-                (soluciones >= 1) ? "Colaborador Destacado 🎖️" : "Estudiante Activo 📚";
+        String rango = (soluciones >= 5) ? "Instructor Senior" :
+                (soluciones >= 1) ? "Colaborador Destacado" : "Estudiante Activo";
 
         String nombrePerfil = usuario.getPerfiles().isEmpty() ? "SIN_PERFIL" : usuario.getPerfiles().get(0).getNombre();
 
@@ -47,21 +47,21 @@ public class UsuarioPerfilController {
         );
 
         return ResponseEntity.ok(datosPerfil);
+    }
 
-        @GetMapping("/ranking")
-        public ResponseEntity obtenerRanking() {
-            var top3 = usuarioRepository.findTop3BySoluciones(PageRequest.of(0, 3));
+    @GetMapping("/ranking")
+    public ResponseEntity obtenerRanking() {
+        var top3 = usuarioRepository.findTop3BySoluciones(PageRequest.of(0, 3));
 
-            var ranking = top3.stream().map(u -> {
-                var soluciones = usuarioRepository.countSolucionesPorUsuario(u.getId());
-                return Map.of(
-                        "nombre", u.getNombre(),
-                        "medallas", soluciones,
-                        "marca", "Miguel-Dark Elite 🏆"
-                );
-            }).toList();
+        var ranking = top3.stream().map(u -> {
+            var soluciones = usuarioRepository.countSolucionesPorUsuario(u.getId());
+            return Map.of(
+                    "nombre", u.getNombre(),
+                    "medallas", soluciones,
+                    "marca", "Miguel-Dark"
+            );
+        }).toList();
 
-            return ResponseEntity.ok(ranking);
-        }
+        return ResponseEntity.ok(ranking);
     }
 }

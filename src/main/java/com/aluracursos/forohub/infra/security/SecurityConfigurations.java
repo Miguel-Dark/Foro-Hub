@@ -29,20 +29,21 @@ public class SecurityConfigurations {
         return http.csrf(csrf -> csrf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
-                    // 1. Autenticación (Público)
                     req.requestMatchers(HttpMethod.POST, "/auth").permitAll();
                     req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
-                    // Primero lo más específico (Cerrar)
-                    // Luego las acciones por Rol
+                    req.requestMatchers(HttpMethod.GET, "/estadisticas").permitAll();
+
+                    req.requestMatchers(HttpMethod.PUT, "/topicos/*/cerrar", "/topicos/*/solucionar", "/soluciones/*")
+                            .hasAnyAuthority("ESTUDIANTE", "INSTRUCTOR");
+
+                    req.requestMatchers("/perfiles/**").authenticated();
+
                     req.requestMatchers(HttpMethod.POST, "/topicos").hasAuthority("ESTUDIANTE");
-                    req.requestMatchers(HttpMethod.PUT, "/topicos/*").hasAuthority("ESTUDIANTE");
                     req.requestMatchers(HttpMethod.DELETE, "/topicos/*").hasAuthority("INSTRUCTOR");
 
-                    req.requestMatchers(HttpMethod.GET, "/estadisticas").permitAll();
-                    req.requestMatchers(HttpMethod.PUT, "/topicos/*/cerrar", "/topicos/*/solucionar", "/soluciones/*").hasAnyAuthority(
-                            "ESTUDIANTE", "INSTRUCTOR");
+                    req.requestMatchers(HttpMethod.PUT, "/topicos/*").hasAuthority("ESTUDIANTE");
 
-                    // Al final lo general (Listar y Detallar)
+                    // 4. LO GENERAL (Solo estar logueado)
                     req.requestMatchers(HttpMethod.GET, "/topicos", "/topicos/*").authenticated();
                     req.anyRequest().authenticated();
                 })
