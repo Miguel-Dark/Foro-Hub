@@ -33,14 +33,14 @@ public class SecurityConfigurations {
                     req.requestMatchers(HttpMethod.POST, "/auth").permitAll();
                     req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
                     // Primero lo más específico (Cerrar)
-                    req.requestMatchers(HttpMethod.GET, "/estadisticas").permitAll();
-                    req.requestMatchers(HttpMethod.PUT, "/topicos/*/cerrar", "/topicos/*/solucionar", "/soluciones/*").hasAnyAuthority(
-                            "INSTRUCTOR", "ESTUDIANTE");
-
                     // Luego las acciones por Rol
                     req.requestMatchers(HttpMethod.POST, "/topicos").hasAuthority("ESTUDIANTE");
                     req.requestMatchers(HttpMethod.PUT, "/topicos/*").hasAuthority("ESTUDIANTE");
                     req.requestMatchers(HttpMethod.DELETE, "/topicos/*").hasAuthority("INSTRUCTOR");
+
+                    req.requestMatchers(HttpMethod.GET, "/estadisticas").permitAll();
+                    req.requestMatchers(HttpMethod.PUT, "/topicos/*/cerrar", "/topicos/*/solucionar", "/soluciones/*").hasAnyAuthority(
+                            "ESTUDIANTE", "INSTRUCTOR");
 
                     // Al final lo general (Listar y Detallar)
                     req.requestMatchers(HttpMethod.GET, "/topicos", "/topicos/*").authenticated();

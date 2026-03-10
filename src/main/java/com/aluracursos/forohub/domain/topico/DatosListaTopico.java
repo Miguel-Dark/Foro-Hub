@@ -8,7 +8,8 @@ public record DatosListaTopico(
         String titulo,
         String mensaje,
         String nombreCurso,
-        LocalDateTime fechaCreacion
+        LocalDateTime fechaCreacion,
+        StatusTopico status
 ) {
     public DatosListaTopico(Topico topico) { //constructor
         this(
@@ -17,7 +18,8 @@ public record DatosListaTopico(
                 topico.getTitulo(),
                 topico.getMensaje(),
                 topico.getCurso().getNombre(),
-                topico.getFechaCreacion()
+                topico.getFechaCreacion(),
+                topico.getStatus()
         );
     }
 }
