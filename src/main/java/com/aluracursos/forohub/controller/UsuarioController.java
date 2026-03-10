@@ -35,7 +35,7 @@ public class UsuarioController {
     @PostMapping
     public ResponseEntity registrar(@RequestBody @Valid DatosRegistroUsuario datos,
                                     UriComponentsBuilder uriComponentsBuilder){
-        var perfilUsuario = perfilRepository.findByNombre("USUARIO");
+        var perfilUsuario = perfilRepository.getReferenceById(datos.idPerfil());
 
         String contrasenaEncriptada = passwordEncoder.encode(datos.contrasena());
 

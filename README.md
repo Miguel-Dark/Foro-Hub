@@ -12,13 +12,13 @@
   <img src="https://img.shields.io/badge/Spring_Security-6.0-green?style=for-the-badge&logo=spring-security" alt="Spring Security">
 </p>
 
-## 📝 Descripción del Proyecto
+##  Descripción del Proyecto
 
 **ForoHub** es una solución Backend desarrollada bajo el ecosistema de Spring Framework, diseñada para la gestión integral de un foro de discusión técnico. El proyecto cumple con los requerimientos del Challenge de Alura Latam y Oracle Next Education (ONE), implementando un sistema persistente para la administración de tópicos, respuestas, usuarios y cursos.
 
 La aplicación garantiza la integridad de los datos mediante validaciones estrictas y un sistema de seguridad robusto que protege la información sensible y restringe el acceso según el rol del usuario (Estudiante o Instructor).
 
-## 🎥 Demostración y Pruebas (Video)
+##  Demostración y Pruebas (Video)
 
 <p align="center">
   <table border="0">
@@ -41,7 +41,7 @@ La aplicación garantiza la integridad de los datos mediante validaciones estric
   </table>
 </p>
 
-## 🛠️ Stack Tecnológico
+##  Stack Tecnológico
 
 * **Lenguaje:** Java 17 (JDK)
 * **Framework:** Spring Boot 3.4.3
@@ -53,7 +53,7 @@ La aplicación garantiza la integridad de los datos mediante validaciones estric
 * **Documentación:** Swagger / OpenAPI
 * **Cliente de Pruebas:** Insomnia
 
-## 🔐 Implementación de Seguridad
+##  Implementación de Seguridad
 
 La seguridad se basa en una arquitectura de autenticación **Stateless** mediante tokens JWT. Se han definido permisos granulares para garantizar que cada recurso sea accedido únicamente por los perfiles autorizados:
 
@@ -62,11 +62,11 @@ La seguridad se basa en una arquitectura de autenticación **Stateless** mediant
 * **Moderación y Administración (DELETE):** Acceso restringido únicamente al rol de Instructor.
 * **Gestión de Cursos y Usuarios:** Rutas administrativas protegidas bajo autoridad de Instructor.
 
-## 📊 Arquitectura de Datos
+##  Arquitectura de Datos
 
 El diseño de la base de datos sigue el modelo relacional, utilizando **PostgreSQL** y **Flyway** para el control de versiones del esquema. Esto asegura que la base de datos sea escalable y fácil de mantener a medida que el foro crece.
 
-## 🚀 Instalación y Uso
+##  Instalación y Uso
 
 1. Clonar el repositorio.
 2. Crear la base de datos en PostgreSQL.
@@ -75,6 +75,7 @@ El diseño de la base de datos sigue el modelo relacional, utilizando **PostgreS
 
 ---
 
-## 👨‍💻 Autor
+## ‍ Autor
 
 Desarrollado por **Miguel Àngel de la Cruz Làzaro**.
+
