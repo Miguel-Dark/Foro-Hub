@@ -7,12 +7,12 @@
 
 ---
 
-### 📝 Descripción del Proyecto
+### Descripción del Proyecto
 **ForoHub** es una solución Backend robusta diseñada para gestionar un foro de discusión dinámico. El proyecto nace como un desafío de **Alura Latam**, donde el objetivo principal fue aplicar conocimientos avanzados de **Java y Spring Boot** para crear una API REST escalable. 
 
 Esta API integra capas de seguridad industrial, migraciones de base de datos automatizadas y una lógica de negocio que garantiza la integridad de la información, reflejando un desarrollo orientado a la **Engineering Excellence**.
 
-### 🛠️ Tech Stack & Initializr Dependencies
+### Tech Stack & Initializr Dependencies
 
 **Core Engine & Environment:**
 <p align="left">
@@ -32,7 +32,19 @@ Esta API integra capas de seguridad industrial, migraciones de base de datos aut
   <img src="https://img.shields.io/badge/Lombok-BC133E?style=flat-square&logo=lombok&logoColor=white" alt="Lombok">
   <img src="https://img.shields.io/badge/Validation-5849BE?style=flat-square&logo=hibernate&logoColor=white" alt="Validation">
   <img src="https://img.shields.io/badge/DevTools-6DB33F?style=flat-square&logo=spring&logoColor=white" alt="DevTools">
+  <img src="https://img.shields.io/badge/OpenAPI_Swagger-6DB33F?style=flat-square&logo=openapi-initiative&logoColor=white" alt="Swagger">
 </p>
+
+---
+
+## 📖 Documentación Interactiva (Swagger UI)
+El proyecto implementa **SpringDoc OpenAPI** para generar una documentación viva y explorable. Esto permite probar los endpoints directamente desde el navegador.
+
+* **URL de la Interfaz:** `http://localhost:8080/api/swagger-ui.html`
+* **Definición Técnica:** `http://localhost:8080/api/v3/api-docs`
+
+> [!TIP]
+> **Acceso Protegido:** Para ejecutar peticiones en Swagger, utiliza el botón **"Authorize"** e ingresa el Token JWT obtenido tras el login.
 
 ---
 
@@ -82,8 +94,8 @@ No es solo código, es blindaje profesional. He implementado:
 ###  Arquitectura DDD Lite
 Dividida para escalabilidad:
 1.  **Domain:** Entidades puras con lógica de negocio encapsulada.
-2.  **Controller:** Interfaz REST con 9 puntos de entrada optimizados.
-3.  **Infra:** Persistencia en PostgreSQL y documentación con Swagger.
+2.  **Controller:** Interfaz REST con puntos de entrada documentados.
+3.  **Infra:** Seguridad JWT, persistencia y **Autodocumentación con Swagger**.
 
 ---
 
